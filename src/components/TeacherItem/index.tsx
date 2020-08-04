@@ -17,19 +17,18 @@ function TeacherItem() {
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            <br /><br />
-            Modi cum dolores quam est voluptatem. Odio expedita corrupti accusamus sint neque. Ex nisi aliquid optio quam quia explicabo, asperiores illum quaerat!
-          </p>
+        <br /><br />
+        Modi cum dolores quam est voluptatem. Odio expedita corrupti accusamus sint neque. Ex nisi aliquid optio quam quia explicabo, asperiores illum quaerat!
+      </p>
 
       <footer>
         <p>
-          Preço/hora
-              <strong>R$ 15,00</strong>
+          Preço/hora <strong>R$ 15,00</strong>
         </p>
         <button type="button">
           <img src={wppIcon} alt="Entrar em contato" />
-              Entrar em contato
-            </button>
+          Entrar em contato
+        </button>
       </footer>
     </article>
   );
