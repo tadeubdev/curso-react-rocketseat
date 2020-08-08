@@ -12,6 +12,14 @@ interface ScheduleItem {
 export default class ClassesController {
 
   async index(request: Request, response: Response) {
+    const classes = await db('classes')
+      .join('users', 'classes.user_id', '=', 'users.id')
+      .select(['classes.*', 'users.*']);
+
+    return response.send(classes);
+  }
+
+  async search(request: Request, response: Response) {
     const filters = request.query;
 
     const subject = filters.subject as string;
@@ -27,7 +35,7 @@ export default class ClassesController {
     const timeInMinutes = convertHourToMinutes(time);
 
     const classes = await db('classes')
-      .whereExists(function() {
+      .whereExists(function () {
         this.select('class_schedule.*')
           .from('class_schedule')
           .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
@@ -39,7 +47,7 @@ export default class ClassesController {
       .join('users', 'classes.user_id', '=', 'users.id')
       .select(['classes.*', 'users.*']);
 
-    return response.send(classes );
+    return response.send(classes);
   }
 
   async create(request: Request, response: Response) {
@@ -92,7 +100,8 @@ export default class ClassesController {
       await trx.rollback();
 
       return response.status(400).json({
-        error: 'Unexpected error while creating new class'
+        error: 'Unexpected error while creating new class',
+        message: err
       });
     }
   }
